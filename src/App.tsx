@@ -8,6 +8,11 @@ interface InfoAlunoProps {
   idade: string;
 }
 
+interface UserProps {
+  nome: string;
+  cargo: string;
+}
+
 export default function App() {
   const [input, setInput] = useState("");
   const [idade, setIdade] = useState("");
@@ -15,6 +20,11 @@ export default function App() {
   const [infoAluno, setInfoAluno] = useState<InfoAlunoProps>();
 
   const [contador, setContador] = useState(0);
+
+  const [user, setUser] = useState<UserProps>({
+    nome: "Visitante",
+    cargo: "",
+  })
 
   function mostrarAluno() {
     setInfoAluno({
@@ -43,7 +53,21 @@ export default function App() {
     setContador(valorAtual => valorAtual -1);
     // setContador(contador - 1) // ou simplesmente isso
   }
-  
+
+  function handleLogin() {
+    setUser({
+      nome: "Alex Nascimento",
+      cargo: "Programador",
+    })
+  }
+
+  function handleLogout() {
+    setUser({
+      nome: "Visitante",
+      cargo: "",
+    })
+  }
+
   return (
     <div>
       <Header title={'Aprendendo do zero ao avançado!'} />
@@ -99,6 +123,19 @@ export default function App() {
       </div>
 
       <hr />
+
+      <div>
+        <h1>Login & Logout praticando useState</h1>
+        <button onClick={handleLogin}>Entrar</button>
+        <button onClick={handleLogout}>Fazer Logout</button>
+
+        <h4>Olá {user.nome}</h4>
+        <strong>{user.cargo}</strong>
+        <br /><br />
+      </div>
+
+      <hr />
+      
       <Footer />
     </div>
   )
